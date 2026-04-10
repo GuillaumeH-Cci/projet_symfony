@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -31,6 +32,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $user_lastname = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $user_name = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $user_username = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $user_desc = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $user_profil_image = null;
+
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private ?\DateTimeImmutable $user_creation_date = null;
+
+    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $user_modif_date = null;
+
+    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $user_deleted_date = null;
 
     public function getId(): ?int
     {
@@ -105,5 +130,101 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $data["\0" . self::class . "\0password"] = hash('crc32c', $this->password);
         
         return $data;
+    }
+
+    public function getUserLastname(): ?string
+    {
+        return $this->user_lastname;
+    }
+
+    public function setUserLastname(string $user_lastname): static
+    {
+        $this->user_lastname = $user_lastname;
+
+        return $this;
+    }
+
+    public function getUserName(): ?string
+    {
+        return $this->user_name;
+    }
+
+    public function setUserName(string $user_name): static
+    {
+        $this->user_name = $user_name;
+
+        return $this;
+    }
+
+    public function getUserUsername(): ?string
+    {
+        return $this->user_username;
+    }
+
+    public function setUserUsername(?string $user_username): static
+    {
+        $this->user_username = $user_username;
+
+        return $this;
+    }
+
+    public function getUserDesc(): ?string
+    {
+        return $this->user_desc;
+    }
+
+    public function setUserDesc(?string $user_desc): static
+    {
+        $this->user_desc = $user_desc;
+
+        return $this;
+    }
+
+    public function getUserProfilImage(): ?string
+    {
+        return $this->user_profil_image;
+    }
+
+    public function setUserProfilImage(?string $user_profil_image): static
+    {
+        $this->user_profil_image = $user_profil_image;
+
+        return $this;
+    }
+
+    public function getUserCreationDate(): ?\DateTimeImmutable
+    {
+        return $this->user_creation_date;
+    }
+
+    public function setUserCreationDate(\DateTimeImmutable $user_creation_date): static
+    {
+        $this->user_creation_date = $user_creation_date;
+
+        return $this;
+    }
+
+    public function getUserModifDate(): ?\DateTimeImmutable
+    {
+        return $this->user_modif_date;
+    }
+
+    public function setUserModifDate(?\DateTimeImmutable $user_modif_date): static
+    {
+        $this->user_modif_date = $user_modif_date;
+
+        return $this;
+    }
+
+    public function getUserDeletedDate(): ?\DateTimeImmutable
+    {
+        return $this->user_deleted_date;
+    }
+
+    public function setUserDeletedDate(?\DateTimeImmutable $user_deleted_date): static
+    {
+        $this->user_deleted_date = $user_deleted_date;
+
+        return $this;
     }
 }
