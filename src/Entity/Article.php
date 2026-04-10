@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
-use BcMath\Number;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
