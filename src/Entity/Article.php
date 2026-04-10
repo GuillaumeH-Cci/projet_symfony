@@ -24,7 +24,7 @@ class Article
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $article_thumbnail = null;
 
-    #[ORM\Column(type: Types::NUMBER)]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $article_nbr_player = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
