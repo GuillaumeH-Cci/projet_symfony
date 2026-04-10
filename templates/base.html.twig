@@ -19,6 +19,12 @@
         {% endif %}
     </head>
     <body>
+        {% include '_partials/header.html.twig' %}
+        <main class="container">
+        
+        {% include '_partials/flashes.html.twig' %}
         {% block body %}{% endblock %}
+
+        {% include '_partials/footer.html.twig' %}
     </body>
 </html>
