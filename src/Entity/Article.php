@@ -25,7 +25,7 @@ class Article
     private ?string $article_thumbnail = null;
 
     #[ORM\Column(type: Types::NUMBER)]
-    private ?Number $article_nbr_player = null;
+    private ?int $article_nbr_player = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $article_creation_date = null;
@@ -77,12 +77,12 @@ class Article
         return $this;
     }
 
-    public function getArticleNbrPlayer(): ?Number
+    public function getArticleNbrPlayer(): ?int
     {
         return $this->article_nbr_player;
     }
 
-    public function setArticleNbrPlayer(Number $article_nbr_player): static
+    public function setArticleNbrPlayer(int $article_nbr_player): static
     {
         $this->article_nbr_player = $article_nbr_player;
 
