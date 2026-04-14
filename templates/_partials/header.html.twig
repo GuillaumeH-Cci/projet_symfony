@@ -10,33 +10,24 @@
             <div class="collapse navbar-collapse" id="navbarMain">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="" class="nav-link">Listes des Jeux</a>
+                        <a href="{{ path('app_games') }}" class="nav-link">Liste des jeux</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('app_consoles') }}" class="nav-link">Liste des consoles</a>
                     </li>
 
-                    {# On vérifie si un utilisateur est connecté ou non 
-                    {% if app.user %}#}
-                    <li class="nav-item">
-                        <a href="" class="nav-link">Ajouter un Jeu</a>
-                    </li>
-
-                    {# Vérification si rôle PROF 
-                    {% if is_granted('') %}#}
-                    <li class="nav-item">
-                        <a href="" class="nav-link">Listes des Consoles</a>
-                    </li>
-                    {#% endif %#}
-                    
-                    <li class="nav-item">
-                        <a href="" class="nav-link">Se déconnecter</a>
-                    </li>
-                    {#% else %#}
-                    <li class="nav-item">
-                        <a href="" class="nav-link">S'inscrire</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">Se connecter</a>
-                    </li>
-                    {#% endif %#}
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a href="{{ path('app_logout') }}" class="nav-link">Se déconnecter</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="{{ path('app_register') }}" class="nav-link">S'inscrire</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('app_login') }}" class="nav-link">Se connecter</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="nav-dot"></div>
