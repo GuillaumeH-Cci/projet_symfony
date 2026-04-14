@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des jeux{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-12">
+            <h1 class="mb-4">Liste des jeux</h1>
+
+            {% if articles is empty %}
+                <div class="alert alert-info">Aucun jeu n'est disponible pour le moment.</div>
+            {% else %}
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for article in articles %}
+                        <div class="col">
+                            <div class="card h-100 shadow-sm">
+                                {% if article.articleThumbnail is not empty %}
+                                    <img src="{{ article.articleThumbnail }}" class="card-img-top" alt="{{ article.articleName }}">
+                                {% endif %}
+                                <div class="card-body d-flex flex-column">
+                                    <h2 class="card-title h5">{{ article.articleName }}</h2>
+                                    <p class="card-text mb-2">{{ article.articleDesc|length > 150 ? article.articleDesc|slice(0, 150) ~ '…' : article.articleDesc }}</p>
+                                    <div class="mt-auto">
+                                        <p class="mb-1"><strong>Joueurs :</strong> {{ article.articleNbrPlayer }}</p>
+                                        <p class="mb-1"><strong>Plateformes :</strong>
+                                            {% if article.plat is empty %}
+                                                Aucune
+                                            {% else %}
+                                                {% set platformNames = [] %}
+                                                {% for plat in article.plat %}
+                                                    {% set platformNames = platformNames|merge([plat.platName]) %}
+                                                {% endfor %}
+                                                {{ platformNames|join(', ') }}
+                                            {% endif %}
+                                        </p>
+                                        <p class="text-muted small">Ajouté le {{ article.articleCreationDate ? article.articleCreationDate|date('d/m/Y') : '—' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

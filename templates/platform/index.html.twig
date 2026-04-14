@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des consoles{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-10 col-lg-8">
+            <h1 class="mb-4">Liste des consoles</h1>
+
+            {% if platforms is empty %}
+                <div class="alert alert-info">Aucune console n'est enregistrée pour le moment.</div>
+            {% else %}
+                <div class="list-group">
+                    {% for platform in platforms %}
+                        <div class="list-group-item list-group-item-action py-3">
+                            <h2 class="h5 mb-1">{{ platform.platName }}</h2>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
