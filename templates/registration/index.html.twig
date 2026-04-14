@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h1 class="card-title h4 mb-4">Créer un compte</h1>
+
+                    {% for label, messages in app.flashes %}
+                        <div class="alert alert-{{ label }}">
+                            {% for message in messages %}
+                                <div>{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                    {{ form_start(registrationForm, {'attr': {'class': 'needs-validation'}}) }}
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.email) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.user_lastname) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.user_name) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.user_username) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.plainPassword.first) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.plainPassword.second) }}
+                        </div>
+                        <div class="d-grid">
+                            {{ form_widget(registrationForm.submit) }}
+                        </div>
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
