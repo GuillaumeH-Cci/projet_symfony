@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,6 +36,23 @@ class Article
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $article_deleted_date = null;
+
+    #[ORM\ManyToOne]
+    private ?User $usr = null;
+
+    #[ORM\ManyToOne]
+    private ?Categories $cat = null;
+
+    /**
+     * @var Collection<int, Plateforme>
+     */
+    #[ORM\ManyToMany(targetEntity: Plateforme::class)]
+    private Collection $plat;
+
+    public function __construct()
+    {
+        $this->plat = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +139,54 @@ class Article
     public function setArticleDeletedDate(?\DateTimeImmutable $article_deleted_date): static
     {
         $this->article_deleted_date = $article_deleted_date;
+
+        return $this;
+    }
+
+    public function getUsr(): ?User
+    {
+        return $this->usr;
+    }
+
+    public function setUsr(?User $usr): static
+    {
+        $this->usr = $usr;
+
+        return $this;
+    }
+
+    public function getCat(): ?Categories
+    {
+        return $this->cat;
+    }
+
+    public function setCat(?Categories $cat): static
+    {
+        $this->cat = $cat;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Plateforme>
+     */
+    public function getPlat(): Collection
+    {
+        return $this->plat;
+    }
+
+    public function addPlat(Plateforme $plat): static
+    {
+        if (!$this->plat->contains($plat)) {
+            $this->plat->add($plat);
+        }
+
+        return $this;
+    }
+
+    public function removePlat(Plateforme $plat): static
+    {
+        $this->plat->removeElement($plat);
 
         return $this;
     }
