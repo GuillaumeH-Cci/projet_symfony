@@ -19,9 +19,9 @@
 
                     {{ form_start(contactForm, {'attr': {'class': 'needs-validation'}}) }}
                         <div class="mb-3">
-                            {{ form_label(contactForm.name) }}
-                            {{ form_widget(contactForm.name, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(contactForm.name) }}
+                            {{ form_label(contactForm.name) }} {# Affiche le label du champ "name" #}
+                            {{ form_widget(contactForm.name, {'attr': {'class': 'form-control'}}) }} {# Affiche le widget du champ "name" avec la classe CSS "form-control" #}
+                            {{ form_errors(contactForm.name) }} {# Affiche les erreurs de validation pour le champ "name" #}
                         </div>
                         <div class="mb-3">
                             {{ form_label(contactForm.email) }}
