@@ -21,6 +21,15 @@ final class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Vérifier si l'email existe déjà
+            $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
+            if ($existingUser) {
+                $this->addFlash('danger', 'Veuillez choisir une autre adresse email.');
+                return $this->render('registration/index.html.twig', [
+                    'registrationForm' => $form->createView(),
+                ]);
+            }
+
             $plainPassword = $form->get('plainPassword')->getData();
             $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
             $user->setUserCreationDate(new \DateTimeImmutable());
