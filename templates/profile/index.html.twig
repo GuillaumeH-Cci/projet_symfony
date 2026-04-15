@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h1 class="card-title h4 mb-0">Mon profil</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-3">
+                            {% if user.userProfilImage %}
+                                <img src="{{ asset(user.userProfilImage) }}" alt="Photo de profil" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
+                            {% else %}
+                                <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 150px; height: 150px;">
+                                    <i class="fas fa-user fa-3x text-muted"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <dl class="row">
+                                <dt class="col-sm-4">Email :</dt>
+                                <dd class="col-sm-8">{{ user.email }}</dd>
+
+                                <dt class="col-sm-4">Nom :</dt>
+                                <dd class="col-sm-8">{{ user.userLastname }}</dd>
+
+                                <dt class="col-sm-4">Prénom :</dt>
+                                <dd class="col-sm-8">{{ user.userName }}</dd>
+
+                                <dt class="col-sm-4">Pseudo :</dt>
+                                <dd class="col-sm-8">{{ user.userUsername ?: 'Non défini' }}</dd>
+
+                                <dt class="col-sm-4">Description :</dt>
+                                <dd class="col-sm-8">{{ user.userDesc ?: 'Aucune description' }}</dd>
+
+                                <dt class="col-sm-4">Date d'inscription :</dt>
+                                <dd class="col-sm-8">{{ user.userCreationDate|date('d/m/Y') }}</dd>
+                            </dl>
+
+                            <div class="mt-4">
+                                <a href="{{ path('app_profile_edit') }}" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i> Modifier mon profil
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
