@@ -21,6 +21,7 @@ final class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             // Vérifier si l'email existe déjà
             $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
             if ($existingUser) {
@@ -30,11 +31,13 @@ final class RegistrationController extends AbstractController
                 ]);
             }
 
+            // Hash du mot de passe et autres propriétés de l'utilisateur
             $plainPassword = $form->get('plainPassword')->getData();
             $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
             $user->setUserCreationDate(new \DateTimeImmutable());
             $user->setRoles(['ROLE_USER']);
 
+            // Enregistrer l'utilisateur en base de données
             $entityManager->persist($user);
             $entityManager->flush();
 
