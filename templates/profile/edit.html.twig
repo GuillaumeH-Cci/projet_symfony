@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon profil{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h1 class="card-title h4 mb-4">Modifier mon profil</h1>
+
+                    {% for label, messages in app.flashes %}
+                        <div class="alert alert-{{ label }}">
+                            {% for message in messages %}
+                                <div>{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                    {{ form_start(profileForm, {'attr': {'class': 'needs-validation'}}) }}
+                        <div class="mb-3">
+                            {{ form_row(profileForm.email) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(profileForm.user_lastname) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(profileForm.user_name) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(profileForm.user_username) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(profileForm.user_desc) }}
+                        </div>
+                        <div class="d-grid">
+                            {{ form_widget(profileForm.submit) }}
+                        </div>
+                    {{ form_end(profileForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
