@@ -51,7 +51,7 @@ final class ProfileController extends AbstractController
 
                 $this->addFlash('success', 'Profil mis à jour avec succès.');
 
-                return $this->redirectToRoute('app_home');
+                return $this->redirectToRoute('app_profile');
             }
         }
 
