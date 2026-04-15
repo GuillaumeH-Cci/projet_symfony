@@ -20,9 +20,9 @@
                         <li class="nav-item">
                             <a href="{{ path('app_profile') }}" class="nav-link">
                                 {% if app.user.userProfilImage %}
-                                    <img src="{{ asset(app.user.userProfilImage) }}" alt="Photo de profil" class="img-fluid rounded-circle" style="max-width: 30px;">
+                                    <img src="{{ asset(app.user.userProfilImage) }}" alt="Photo de profil" class="img-fluid rounded-circle border bg-light" style="max-width: 30px;">
                                 {% else %}
-                                    <img src="{{ asset('images/user_default.png') }}" alt="Avatar par défaut" class="img-fluid rounded-circle" style="max-width: 30px;">
+                                    <img src="{{ asset('images/user_default.png') }}" alt="Avatar par défaut" class="img-fluid rounded-circle border bg-light" style="max-width: 30px;">
                                 {% endif %}
                             </a>
                         </li>
