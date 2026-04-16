@@ -3,14 +3,18 @@
 {% block title %}Mr. Retro - Home{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Mr. Retro</h1>
-
-    <p>Mettre un texte de présentation ici. </p>
+<div class="text-center my-5" style="background-image: url('/images/retro-background.jpg'); background-size: cover; background-position: center; padding: 100px 20px;">
+    <h1 class="display-4 text-primary">Bienvenue sur Mr. Retro - Le n°1 en matière de jeux vidéo rétro</h1>
 </div>
+
+<div class="container my-5">
+    <h2 class="text-primary">Statistiques : </h2>
+    <ul>
+        <li>Il y a actuellement <strong class="text-danger">{{ userCount }}</strong> utilisateurs inscrits</li>
+        <li>Nombre de posts actuel : <strong class="text-danger">{{ postCount }}</strong></li>
+        <li>Nombre de consoles renseignées : <strong class="text-danger">{{ consoleCount }}</strong></li>
+    </ul>
+</div>
+
+
 {% endblock %}

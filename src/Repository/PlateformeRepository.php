@@ -16,6 +16,14 @@ class PlateformeRepository extends ServiceEntityRepository
         parent::__construct($registry, Plateforme::class);
     }
 
+    public function countAll(): int
+    {
+    return $this->createQueryBuilder('u')
+        ->select('count(u.id)')
+        ->getQuery()
+        ->getSingleScalarResult();
+    }
+
 //    /**
 //     * @return Plateforme[] Returns an array of Plateforme objects
 //     */

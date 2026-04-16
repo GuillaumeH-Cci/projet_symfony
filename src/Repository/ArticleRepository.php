@@ -16,6 +16,13 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+    public function countAll(): int
+    {
+    return $this->createQueryBuilder('u')
+        ->select('count(u.id)')
+        ->getQuery()
+        ->getSingleScalarResult();
+    }
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */
