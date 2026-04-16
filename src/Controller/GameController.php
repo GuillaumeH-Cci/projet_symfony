@@ -57,7 +57,7 @@ final class GameController extends AbstractController
             return $this->redirectToRoute('app_games');
         }
 
-        return $this->render('game/new.html.twig', [
+        return $this->render('game/add.html.twig', [
             'articleForm' => $form->createView(),
         ]);
     }
@@ -80,7 +80,7 @@ final class GameController extends AbstractController
             return $this->redirectToRoute('app_consoles');
         }
 
-        return $this->render('platform/new.html.twig', [
+        return $this->render('platform/add.html.twig', [
             'consoleForm' => $form->createView(),
         ]);
     }
