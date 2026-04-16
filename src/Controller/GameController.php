@@ -85,11 +85,11 @@ final class GameController extends AbstractController
         ]);
     }
 
-    #[Route('/consoles/{id}', name: 'app_game_show')]
-    public function showGameArticle(Plateforme $platform): Response
-    {
+    #[Route('/games/{id}', name: 'app_game_show')]
+    public function showGameArticle(Article $article): Response
+    {   
         return $this->render('game/show.html.twig', [
-            'platform' => $platform,
+            'article' => $article,
         ]);
     }
 }

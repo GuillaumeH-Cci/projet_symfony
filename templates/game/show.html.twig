@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ articles.name }}{% endblock %}
+{% block title %}{{ article.articleName }}{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
@@ -9,17 +9,30 @@
                 <div class="card shadow-sm mb-4">
                     <div class="card-header d-flex align-items-center">
                         <a href="{{ path('app_games') }}" class="btn btn-outline-secondary me-3" title="Retour à la liste des jeux">Retour à la liste des jeux</a>
-                        <h1 class="card-title h4 mb-0">{{ articles.name }}</h1>
+                        <h1 class="card-title h4 mb-0">{{ article.articleName }}</h1>
                     </div>
                     <div class="card-body">
-                        <p>{{ articles.description }}</p>
-                        <p><strong>Plateforme :</strong> {{ articles.plateforme.name }}</p>
-                        <p><strong>Date de sortie :</strong> {{ articles.releaseDate ? articles.releaseDate|date('d/m/Y') : 'Non définie' }}</p>
-                        <p><strong>Genre :</strong> {{ articles.genre }}</p>
+                        {% for plateforme in article.plat %}
+                        <span class="badge bg-info text-dark">
+                            {{ plateforme.platName }} 
+                        </span>
+                        {% else %}
+                        <span class="text-muted">Aucune plateforme spécifiée</span>
+                        {% endfor %}
 
-                        {% if articles.image %}
+                        {% for cat in article.cat %}
+                        <p><strong>Genre :</strong> {{ cat.catName }}</p>
+                        {% else %}
+                        <p><strong>Genre :</strong> Aucun genre spécifié</p>
+                        {% endfor %}
+                        <p><strong>Nombre de joueurs :</strong> {{ article.articleNbrPlayer }}</p>
+                        <p><strong>Date de création :</strong> {{ article.articleCreationDate ? article.articleCreationDate|date('d/m/Y') : '—' }}</p>
+                        
+                        <p>{{ article.articleDesc }}</p>
+
+                        {% if article.articleThumbnail is not null %}
                             <div class="text-center mt-4">
-                                <img src="{{ asset(articles.image) }}" alt="{{ articles.name }}" class="img-fluid rounded">
+                                <img src="{{ asset('uploads/thumbnails/' ~ article.articleThumbnail) }}" alt="{{ article.articleName }}" class="img-fluid rounded">
                             </div>
                         {% endif %}
                     </div>
