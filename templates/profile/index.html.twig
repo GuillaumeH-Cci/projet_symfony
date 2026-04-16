@@ -7,7 +7,7 @@
         <div class="col-lg-8">
             <div class="card shadow-sm mb-4">
                 <div class="card-header d-flex align-items-center">
-                    <a href="{{ path('app_home') }}" class="btn btn-outline-secondary me-3" title="Retour à l'accueil"></a>
+                    <a href="{{ path('app_home') }}" class="btn btn-outline-secondary me-3" title="Retour à l'accueil">Retour à l'accueil</a>
                     <h1 class="card-title h4 mb-0">Mon profil</h1>
                 </div>
                 <div class="card-body">
@@ -41,7 +41,7 @@
                                 <dt class="col-sm-4">Description :</dt>
                                 <dd class="col-sm-8">{{ user.userDesc ?: 'Aucune description' }}</dd>
 
-                                <dd></dd>
+                                <hr>
                                 <dt class="col-sm-4">Date d'inscription :</dt>
                                 <dd class="col-sm-8">{{ user.userCreationDate|date('d/m/Y') }}</dd>
 
