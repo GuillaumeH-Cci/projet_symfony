@@ -18,7 +18,7 @@ final class UserStory extends Story
 
         // Create 1 admin user
         $admin = UserFactory::createOne([
-            'email' => 'admin@example.com',
+            'email' => 'guillaumehess411@gmail.com',
             'roles' => ['ROLE_ADMIN', 'ROLE_USER'],
         ]);
         $this->addState('admin', $admin);
