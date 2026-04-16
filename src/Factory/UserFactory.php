@@ -3,22 +3,17 @@
 namespace App\Factory;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
-use Doctrine\ORM\EntityRepository;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
-use Zenstruck\Foundry\Persistence\Proxy;
-use Zenstruck\Foundry\Persistence\ProxyRepositoryDecorator;
 
 /**
  * @extends PersistentObjectFactory<User>
  */
-final class UserFactory extends PersistentObjectFactory{
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
-     *
-     * @todo inject services if required
-     */
-    public function __construct()
+final class UserFactory extends PersistentObjectFactory
+{
+    private const DEFAULT_PASSWORD = 'P@ssw0rd';
+
+    public function __construct(private UserPasswordHasherInterface $userPasswordHasher)
     {
     }
 
@@ -32,10 +27,12 @@ final class UserFactory extends PersistentObjectFactory{
      *
      * @todo add your default values here
      */
-    #[\Override]    protected function defaults(): array|callable    {
+    #[\Override]
+    protected function defaults(): array|callable
+    {
         return [
-            'email' => self::faker()->text(180),
-            'password' => self::faker()->text(),
+            'email' => self::faker()->email(),
+            'password' => $this->userPasswordHasher->hashPassword(new User(), self::DEFAULT_PASSWORD),
             'roles' => ["ROLE_USER"],
             'user_creation_date' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'user_lastname' => self::faker()->text(255),
