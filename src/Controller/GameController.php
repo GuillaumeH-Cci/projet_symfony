@@ -36,7 +36,7 @@ final class GameController extends AbstractController
         ]);
     }
 
-    #[Route('/games/new', name: 'app_game_new')]
+    #[Route('/games/add', name: 'app_game_new')]
     public function newGame(Request $request, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
@@ -62,7 +62,7 @@ final class GameController extends AbstractController
         ]);
     }
 
-    #[Route('/consoles/new', name: 'app_console_new')]
+    #[Route('/consoles/add', name: 'app_console_new')]
     public function newConsole(Request $request, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
