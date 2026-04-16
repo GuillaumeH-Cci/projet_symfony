@@ -40,17 +40,16 @@
                                         </p>
                                         <p class="text-muted small">Ajouté le {{ article.articleCreationDate ? article.articleCreationDate|date('d/m/Y') : '—' }}</p>
                                         <p class="text-muted">
-                                            Créé par 
-                                            {# Twig va appeler automatiquement getUserProfilImage() #}
-                                            {% if article.usr.userProfilImage is null %}
+                                            Créé par :  
+                                            
+                                            <a href="{{ path('app_user_update', {'id': article.usr.id}) }}" class="d-flex align-items-center text-decoration-none text-dark">
+                                                {% if article.usr.userProfilImage is null %}
                                                 <img src="{{ asset('profile-pics/user-default.png') }}" alt="Avatar par défaut" class="rounded-circle me-2" width="30" height="30">
-                                            {% else %}
+                                                {% else %}
                                                 <img src="{{ asset('uploads/profile-pics/' ~ article.usr.userProfilImage) }}" alt="Avatar de {{ article.usr.username }}" class="rounded-circle me-2" width="30" height="30">
-                                            {% endif %}
-
-                                            <a href="{{ path('app_user_update', {'id': article.usr.id}) }}" class="text-primary text-decoration-underline">
-                                                {{ article.usr.userusername }}
-                                            </a>
+                                                {% endif %}
+                                                {{ article.usr.username }}
+                                            </a>   
                                         </p>
                                     </div>
                                 </div>
