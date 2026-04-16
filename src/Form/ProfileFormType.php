@@ -40,6 +40,11 @@ class ProfileFormType extends AbstractType
                 'required' => false,
                 'attr' => ['class' => 'form-control', 'rows' => 4],
             ])
+            ->add('user_profil_image', TextType::class, [
+                'label' => 'URL de votre image de profil',
+                'required' => false,
+                'attr' => ['class' => 'form-control'],
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer les modifications',
                 'attr' => ['class' => 'btn btn-primary mt-3'],
