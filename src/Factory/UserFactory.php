@@ -36,7 +36,7 @@ final class UserFactory extends PersistentObjectFactory{
         return [
             'email' => self::faker()->text(180),
             'password' => self::faker()->text(),
-            'roles' => [],
+            'roles' => ["ROLE_USER"],
             'user_creation_date' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'user_lastname' => self::faker()->text(255),
             'user_name' => self::faker()->text(255),
