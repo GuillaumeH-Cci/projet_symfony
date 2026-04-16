@@ -28,21 +28,15 @@ final class ProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/profile/edit/{id<\d+>}', name: 'app_profile_edit')]
+    #[Route('/profile/edit', name: 'app_profile_edit')]
     #[IsGranted('ROLE_USER')]
-    public function edit(Request $request, EntityManagerInterface $entityManager, int $id): Response
+    public function edit(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // Récupère l'utilisateur à partir de l'ID
-        $user = $entityManager->getRepository(User::class)->find($id);
+        $user = $this->getUser();
 
-        // Vérifie que l'utilisateur existe
-        if (!$user) {
+        // Vérifie que l'utilisateur existe et est bien l'entité User
+        if (!$user instanceof User) {
             throw $this->createNotFoundException('Utilisateur non trouvé');
-        }
-
-        // Vérifie que l'utilisateur connecté est bien le propriétaire du profil
-        if ($user !== $this->getUser()) {
-            throw $this->createAccessDeniedException();
         }
 
         $form = $this->createForm(ProfileFormType::class, $user);
