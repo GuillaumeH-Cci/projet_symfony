@@ -3,9 +3,6 @@
 namespace App\Story;
 
 use App\Factory\ArticleFactory;
-use App\Factory\UserFactory;
-use App\Factory\CategoriesFactory;
-use App\Factory\PlateformeFactory;
 use Zenstruck\Foundry\Story;
 
 
@@ -16,17 +13,20 @@ final class GameStory extends Story
 {
     public function build(): void
     {
-        $this->addDependency(UserStory::class);
-        $this->addDependency(CatStory::class);
-        $this->addDependency(PlatStory::class);
+        // Load dependencies
+        UserStory::load();
+        CatStory::load();
+        PlatStory::load();
 
         // Créer 10 articles avec des utilisateurs, catégories et plateformes aléatoires
-        ArticleFactory::createMany(10, function () {
+        $games = ArticleFactory::createMany(10, function () {
             return [
-                'usr' => UserFactory::random(),
-                'cat' => CategoriesFactory::random(),
-                'plat' => PlateformeFactory::randomRange(1, 3),
+                'usr' => UserStory::getRandom('users'),
+                'cat' => CatStory::getRandom('categories'),
+                'plat' => PlatStory::getRandomRange('plateformes', 1, 3),
             ];
         });
+
+        $this->addState('games', $games, 'games');
     }
 }

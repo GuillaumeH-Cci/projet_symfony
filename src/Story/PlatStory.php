@@ -12,10 +12,14 @@ final class PlatStory extends Story
 {
     public function build(): void
     {
-        PlateformeFactory::createOne(['plat_name' => 'Amiga']);
-        PlateformeFactory::createOne(['plat_name' => 'Nintendo 64']);
-        PlateformeFactory::createOne(['plat_name' => 'PlayStation 1']);
-        PlateformeFactory::createOne(['plat_name' => 'Xbox']);
-        PlateformeFactory::createOne(['plat_name' => 'Game Boy']);
+        $plateformes = [
+            PlateformeFactory::createOne(['plat_name' => 'Amiga']),
+            PlateformeFactory::createOne(['plat_name' => 'Nintendo 64']),
+            PlateformeFactory::createOne(['plat_name' => 'PlayStation 1']),
+            PlateformeFactory::createOne(['plat_name' => 'Xbox']),
+            PlateformeFactory::createOne(['plat_name' => 'Game Boy']),
+        ];
+
+        $this->addState('plateformes', $plateformes, 'plateformes');
     }
 }

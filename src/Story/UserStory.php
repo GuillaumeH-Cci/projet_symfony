@@ -13,12 +13,14 @@ final class UserStory extends Story
     public function build(): void
     {
         // Create 5 regular users
-        UserFactory::createMany(5);
+        $users = UserFactory::createMany(5);
+        $this->addState('users', $users, 'users');
 
         // Create 1 admin user
-        UserFactory::createOne([
+        $admin = UserFactory::createOne([
             'email' => 'admin@example.com',
             'roles' => ['ROLE_ADMIN', 'ROLE_USER'],
         ]);
+        $this->addState('admin', $admin);
     }
 }

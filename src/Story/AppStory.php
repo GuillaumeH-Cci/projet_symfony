@@ -13,9 +13,9 @@ final class AppStory extends Story
 {
     public function build(): void
     {
-        $this->addDependency(UserStory::class);
-        $this->addDependency(CatStory::class);
-        $this->addDependency(PlatStory::class);
-        $this->addDependency(GameStory::class);
+        UserStory::load();
+        CatStory::load();
+        PlatStory::load();
+        GameStory::load();
     }
 }

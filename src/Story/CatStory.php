@@ -12,15 +12,19 @@ final class CatStory extends Story
 {
     public function build(): void
     {
-        CategoriesFactory::createOne(['cat_name' => 'Action']);
-        CategoriesFactory::createOne(['cat_name' => 'RPG']);
-        CategoriesFactory::createOne(['cat_name' => 'Stratégie']);
-        CategoriesFactory::createOne(['cat_name' => 'Puzzle']);
-        CategoriesFactory::createOne(['cat_name' => 'Plateforme']);
-        CategoriesFactory::createOne(['cat_name' => 'Aventure']);   
-        CategoriesFactory::createOne(['cat_name' => 'Simulation']); 
-        CategoriesFactory::createOne(['cat_name' => 'Sport']);
-        CategoriesFactory::createOne(['cat_name' => 'Horreur']);
-        CategoriesFactory::createOne(['cat_name' => 'Multijoueur']);
+        $categories = [
+            CategoriesFactory::createOne(['cat_name' => 'Action']),
+            CategoriesFactory::createOne(['cat_name' => 'RPG']),
+            CategoriesFactory::createOne(['cat_name' => 'Stratégie']),
+            CategoriesFactory::createOne(['cat_name' => 'Puzzle']),
+            CategoriesFactory::createOne(['cat_name' => 'Plateforme']),
+            CategoriesFactory::createOne(['cat_name' => 'Aventure']),   
+            CategoriesFactory::createOne(['cat_name' => 'Simulation']), 
+            CategoriesFactory::createOne(['cat_name' => 'Sport']),
+            CategoriesFactory::createOne(['cat_name' => 'Horreur']),
+            CategoriesFactory::createOne(['cat_name' => 'Multijoueur']),
+        ];
+
+        $this->addState('categories', $categories, 'categories');
     }
 }
