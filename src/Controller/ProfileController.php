@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfileFormType;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +16,7 @@ final class ProfileController extends AbstractController
 {
     #[Route('/profile', name: 'app_profile')]
     #[IsGranted('ROLE_USER')]
-    public function index(): Response
+    public function index(ArticleRepository $articleRepository): Response
     {
         $user = $this->getUser();
 
@@ -25,6 +26,7 @@ final class ProfileController extends AbstractController
 
         return $this->render('profile/index.html.twig', [
             'user' => $user,
+            'articles' => $articleRepository->findBy(['usr' => $user]) 
         ]);
     }
 
@@ -58,6 +60,15 @@ final class ProfileController extends AbstractController
 
         return $this->render('profile/edit.html.twig', [
             'profileForm' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/profile/user/{id}', name: 'app_user_update')]
+    public function update(User $user): Response
+    {
+        // Logique pour afficher les détails de l'utilisateur ou permettre la modification
+        return $this->render('profile/index.html.twig', [
+            'user' => $user,
         ]);
     }
 }

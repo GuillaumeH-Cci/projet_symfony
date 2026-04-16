@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ articles.name }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header d-flex align-items-center">
+                        <a href="{{ path('app_games') }}" class="btn btn-outline-secondary me-3" title="Retour à la liste des jeux">Retour à la liste des jeux</a>
+                        <h1 class="card-title h4 mb-0">{{ articles.name }}</h1>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ articles.description }}</p>
+                        <p><strong>Plateforme :</strong> {{ articles.plateforme.name }}</p>
+                        <p><strong>Date de sortie :</strong> {{ articles.releaseDate ? articles.releaseDate|date('d/m/Y') : 'Non définie' }}</p>
+                        <p><strong>Genre :</strong> {{ articles.genre }}</p>
+
+                        {% if articles.image %}
+                            <div class="text-center mt-4">
+                                <img src="{{ asset(articles.image) }}" alt="{{ articles.name }}" class="img-fluid rounded">
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

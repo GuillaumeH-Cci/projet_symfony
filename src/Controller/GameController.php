@@ -84,4 +84,12 @@ final class GameController extends AbstractController
             'consoleForm' => $form->createView(),
         ]);
     }
+
+    #[Route('/consoles/{id}', name: 'app_game_show')]
+    public function showGameArticle(Plateforme $platform): Response
+    {
+        return $this->render('game/show.html.twig', [
+            'platform' => $platform,
+        ]);
+    }
 }
