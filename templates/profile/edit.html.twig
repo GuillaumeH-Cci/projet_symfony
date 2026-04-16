@@ -36,6 +36,12 @@
                         <div>
                             {{ form_row(profileForm.user_profil_image) }}
                         </div>
+                        <div>
+                            {{ form_row(profileForm.plainPassword) }}
+                        </div>
+                        <div>
+                            {{ form_row(profileForm.confirmPassword) }} 
+                        </div>
                         <div class="d-grid">
                             {{ form_widget(profileForm.submit) }}
                         </div>

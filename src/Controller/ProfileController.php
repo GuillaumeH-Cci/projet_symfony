@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -32,7 +33,10 @@ final class ProfileController extends AbstractController
 
     #[Route('/profile/edit', name: 'app_profile_edit')]
     #[IsGranted('ROLE_USER')]
-    public function edit(Request $request, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, 
+    EntityManagerInterface $entityManager,
+    UserPasswordHasherInterface $userPasswordHasher,
+    ): Response
     {
         $user = $this->getUser();
 
@@ -46,9 +50,19 @@ final class ProfileController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
+
             if ($existingUser && $existingUser->getId() !== $user->getId()) {
                 $this->addFlash('danger', 'Cette adresse email est déjà utilisée par un autre compte.');
             } else {
+                /** @var string $plainPassword */
+                $plainPassword = $form->get('plainPassword')->getData();
+
+                // Dans le cas où le mot de passe est renseigné
+                if($plainPassword) {
+
+                // encode the plain password
+                $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+                }   
                 $entityManager->persist($user);
                 $entityManager->flush();
 

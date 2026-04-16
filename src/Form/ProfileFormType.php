@@ -45,6 +45,18 @@ class ProfileFormType extends AbstractType
                 'required' => false,
                 'attr' => ['class' => 'form-control'],
             ])
+            ->add('plainPassword', TextType::class, [
+                'label' => 'Nouveau mot de passe (laisser vide pour ne pas changer)',
+                'required' => false,
+                'mapped' => false,
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('confirmPassword', TextType::class, [
+                'label' => 'Confirmer le nouveau mot de passe',
+                'required' => false,
+                'mapped' => false,
+                'attr' => ['class' => 'form-control'],
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer les modifications',
                 'attr' => ['class' => 'btn btn-primary mt-3'],
