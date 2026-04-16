@@ -17,8 +17,8 @@
                     {% for article in articles %}
                         <div class="col">
                             <div class="card h-100 shadow-sm">
-                                {% if article.articleThumbnail is empty %}
-                                    <img src="no-thumbnail.png" class="card-img-top" alt="{{ article.articleName }}">
+                                {% if article.articleThumbnail is null %}
+                                    <img src="{{ asset('images/no-thumbnail.png') }}" class="card-img-top" alt="Pas de miniature disponible">
                                 {% else %}
                                     <img src="{{ asset('uploads/thumbnails/' ~ article.articleThumbnail) }}" class="card-img-top" alt="{{ article.articleName }}">
                                 {% endif %}
