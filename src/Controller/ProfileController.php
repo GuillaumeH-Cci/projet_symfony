@@ -64,11 +64,12 @@ final class ProfileController extends AbstractController
     }
 
     #[Route('/profile/user/{id}', name: 'app_user_update')]
-    public function update(User $user): Response
+    public function update(User $user, ArticleRepository $articleRepository): Response
     {
         // Logique pour afficher les détails de l'utilisateur ou permettre la modification
         return $this->render('profile/index.html.twig', [
             'user' => $user,
+            'articles' => $articleRepository->findBy(['usr' => $user]) 
         ]);
     }
 }
