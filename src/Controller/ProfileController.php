@@ -54,6 +54,7 @@ final class ProfileController extends AbstractController
             if ($existingUser && $existingUser->getId() !== $user->getId()) {
                 $this->addFlash('danger', 'Cette adresse email est déjà utilisée par un autre compte.');
             } else {
+
                 /** @var string $plainPassword */
                 $plainPassword = $form->get('plainPassword')->getData();
 
@@ -63,6 +64,8 @@ final class ProfileController extends AbstractController
                 // encode the plain password
                 $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
                 }   
+
+                $user->setUserModifDate(new \DateTimeImmutable());
                 $entityManager->persist($user);
                 $entityManager->flush();
 
