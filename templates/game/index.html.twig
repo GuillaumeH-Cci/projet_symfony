@@ -5,7 +5,10 @@
 {% block body %}
     <div class="row justify-content-center mt-5">
         <div class="col-12">
-            <h1 class="mb-4">Liste des jeux</h1>
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h1 class="mb-0">Liste des jeux</h1>
+                <a href="{{ path('app_game_new') }}" class="btn btn-primary">Ajouter un jeu</a>
+            </div>
 
             {% if articles is empty %}
                 <div class="alert alert-info">Aucun jeu n'est disponible pour le moment.</div>

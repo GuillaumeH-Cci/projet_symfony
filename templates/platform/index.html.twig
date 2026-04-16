@@ -5,7 +5,10 @@
 {% block body %}
     <div class="row justify-content-center mt-5">
         <div class="col-10 col-lg-8">
-            <h1 class="mb-4">Liste des consoles</h1>
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h1 class="mb-0">Liste des consoles</h1>
+                <a href="{{ path('app_console_new') }}" class="btn btn-primary">Ajouter une console</a>
+            </div>
 
             {% if platforms is empty %}
                 <div class="alert alert-info">Aucune console n'est enregistrée pour le moment.</div>
