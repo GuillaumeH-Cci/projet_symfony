@@ -3,11 +3,7 @@
 namespace App\Factory;
 
 use App\Entity\Article;
-use App\Repository\ArticleRepository;
-use Doctrine\ORM\EntityRepository;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
-use Zenstruck\Foundry\Persistence\Proxy;
-use Zenstruck\Foundry\Persistence\ProxyRepositoryDecorator;
 
 /**
  * @extends PersistentObjectFactory<Article>
@@ -37,7 +33,7 @@ final class ArticleFactory extends PersistentObjectFactory{
             'article_creation_date' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'article_desc' => self::faker()->text(),
             'article_name' => self::faker()->text(255),
-            'article_nbr_player' => self::faker()->randomNumber(),
+            'article_nbr_player' => self::faker()->randomNumber(1, 6),
         ];
     }
 

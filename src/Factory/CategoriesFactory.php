@@ -3,11 +3,8 @@
 namespace App\Factory;
 
 use App\Entity\Categories;
-use App\Repository\CategoriesRepository;
-use Doctrine\ORM\EntityRepository;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
-use Zenstruck\Foundry\Persistence\Proxy;
-use Zenstruck\Foundry\Persistence\ProxyRepositoryDecorator;
+
 
 /**
  * @extends PersistentObjectFactory<Categories>
