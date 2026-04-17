@@ -17,7 +17,7 @@
                     {% for article in articles %}
                         <div class="col">
                                 <div class="card h-100 shadow-sm">
-                                    <a href="{{ path('app_game_show', {'id': article.id}) }}" class="stretched-link text-decoration-none text-dark">
+                                    <a href="{{ path('app_game_show', {'id': article.id}) }}" class="text-decoration-none text-dark">
                                     {% if article.articleThumbnail is null %}
                                         <img src="{{ asset('images/no-thumbnail.png') }}" class="card-img-top" alt="Pas de miniature disponible">
                                     {% else %}
@@ -39,22 +39,22 @@
                                                     {{ platformNames|join(', ') }}
                                                 {% endif %}
                                             </p>
-                                            <p class="text-muted small">Ajouté le {{ article.articleCreationDate ? article.articleCreationDate|date('d/m/Y') : '—' }}</p>
-                                            <p class="text-muted">
-                                                Créé par :  
-                                                
-                                                <a href="{{ path('app_user_update', {'id': article.usr.id}) }}" class="d-flex align-items-center text-decoration-none text-dark">
-                                                    {% if article.usr.userProfilImage is null %}
-                                                    <img src="{{ asset('profile-pics/user-default.png') }}" alt="Avatar par défaut" class="rounded-circle me-2" width="30" height="30">
-                                                    {% else %}
-                                                    <img src="{{ asset('uploads/profile-pics/' ~ article.usr.userProfilImage) }}" alt="Avatar de {{ article.usr.username }}" class="rounded-circle me-2" width="30" height="30">
-                                                    {% endif %}
-                                                    {{ article.usr.username }}
-                                                </a>   
-                                            </p>
-                                        </div>
+                                        </a>
+                                        <p class="text-muted small">Ajouté le {{ article.articleCreationDate ? article.articleCreationDate|date('d/m/Y') : '—' }}</p>
+                                        <p class="text-muted">
+                                            Créé par :  
+                                            
+                                            <a href="{{ path('app_user_update', {'id': article.usr.id}) }}" class="d-flex align-items-center text-decoration-none text-dark">
+                                                {% if article.usr.userProfilImage is null %}
+                                                <img src="{{ asset('profile-pics/user-default.png') }}" alt="Avatar par défaut" class="rounded-circle me-2" width="30" height="30">
+                                                {% else %}
+                                                <img src="{{ asset('uploads/profile-pics/' ~ article.usr.userProfilImage) }}" alt="Avatar de {{ article.usr.username }}" class="rounded-circle me-2" width="30" height="30">
+                                                {% endif %}
+                                                {{ article.usr.username }}
+                                            </a>   
+                                        </p>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     {% endfor %}
