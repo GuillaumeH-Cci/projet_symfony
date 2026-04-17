@@ -16,12 +16,13 @@
                             {% if user.userProfilImage %}
                                 <img src="{{ asset(user.userProfilImage) }}" alt="Photo de profil" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
                             {% else %}
-                                <img src="{{ asset('images/user_default.png') }}" alt="Avatar par défaut" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
+                                <img src="{{ asset('profile-pics/user-default.png') }}" alt="Avatar par défaut" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
                             {% endif %}
                         </div>
                         <div class="col-md-8">
                             <dl class="row">
-                                {% if user.id == app.user.id %}
+                                {# Affiche les informations personnelles uniquement si l'utilisateur connecté est le propriétaire du profil #}
+                                {% if app.user and user and user.id == app.user.id %}
                                 <div class="bg-light p-3 rounded">
                                     <small class="text-danger"><u>/!\ Informations personnelles - Seul vous pouvez les voir /!\ </u></small>
                                     <dt class="col-sm-4">Email :</dt>
@@ -50,7 +51,7 @@
                             </dl>
 
                             <div class="mt-4">
-                                {% if user.id == app.user.id %}
+                                {% if app.user and user and user.id == app.user.id %}
                                 <a href="{{ path('app_profile_edit') }}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i> Modifier mon profil
                                 </a>
@@ -67,7 +68,7 @@
     {# Liste des Articles postés par l'utilisateur #}
     <div class="row justify-content-center mt-5">
         <div class="col-lg-8">
-            {% if user.id == app.user.id %}
+            {% if app.user and user and user.id == app.user.id %}
             <h2 class="mb-4">Mes articles</h2>
             {% else %}
             <h2 class="mb-4">Article de l'utilisateur</h2>
