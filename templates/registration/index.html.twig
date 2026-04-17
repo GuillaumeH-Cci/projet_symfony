@@ -36,4 +36,21 @@
             </div>
         </div>
     </div>
+
+    {% if not registrationForm.vars.valid %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for error in registrationForm.vars.errors %}
+                <li>{{ error.message }}</li>
+            {% endfor %}
+            {# Affiche aussi les erreurs des champs spécifiques (comme le mot de passe qui ne matche pas) #}
+            {% for child in registrationForm.children %}
+                {% for error in child.vars.errors %}
+                    <li>{{ child.vars.label }}: {{ error.message }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
 {% endblock %}

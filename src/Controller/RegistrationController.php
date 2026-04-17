@@ -16,28 +16,27 @@ final class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+        
+    $user = new User();
+    $form = $this->createForm(RegistrationFormType::class, $user);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+    if ($form->isSubmitted() && $form->isValid()) {
 
-            // Vérifier si l'email existe déjà
-            $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
-            if ($existingUser) {
-                $this->addFlash('danger', 'Veuillez choisir une autre adresse email.');
-                return $this->render('registration/index.html.twig', [
-                    'registrationForm' => $form->createView(),
-                ]);
-            }
-
-            // Hash du mot de passe et autres propriétés de l'utilisateur
-            $plainPassword = $form->get('plainPassword')->getData();
+        // 1. Vérifier si l'email existe déjà (Bonne pratique)
+        $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
+        if ($existingUser) {
+            $this->addFlash('danger', 'Veuillez choisir une autre adresse email.');
+            // On ne fait rien d'autre, le code descendra naturellement vers le render final
+        } else {
+            // 2. CORRECTION ICI : Récupérer le mot de passe dans le champ 'first'
+            $plainPassword = $form->get('plainPassword')->get('first')->getData();
+            
             $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
             $user->setUserCreationDate(new \DateTimeImmutable());
             $user->setRoles(['ROLE_USER']);
 
-            // Enregistrer l'utilisateur en base de données
+            // 3. Enregistrer
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -45,9 +44,10 @@ final class RegistrationController extends AbstractController
 
             return $this->redirectToRoute('app_login');
         }
-
-        return $this->render('registration/index.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
     }
+
+    return $this->render('registration/index.html.twig', [
+        'registrationForm' => $form->createView(),
+    ]);
+}
 }
