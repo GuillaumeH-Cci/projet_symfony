@@ -11,7 +11,7 @@ use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
  */
 final class UserFactory extends PersistentObjectFactory
 {
-    private const DEFAULT_PASSWORD = 'P@ssw0rd';
+    private const DEFAULT_PASSWORD = 'password1254';
 
     public function __construct(private UserPasswordHasherInterface $userPasswordHasher)
     {
