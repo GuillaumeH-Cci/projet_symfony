@@ -7,6 +7,20 @@
 <div class="container mt-4">
     <h1>Admin Dashboard</h1>
 
+    <form method="GET">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" 
+                placeholder="Rechercher par nom..." aria-label="Rechercher par nom..." 
+                name="search_name" id="search_name" value="{{ searchName }}">
+
+            <button class="btn btn-outline-secondary" type="button" id="button-addon1"><i class="bi bi-search"></i></button>
+        </div>
+    </form>
+
+    <div class="count mb-2">
+        {{ pagination.getTotalItemCount }} Utilisateur(s) trouvé(s) ! 
+    </div>
+
     <h2>Liste des utilisateurs :</h2>
     <table class="table">
         <thead>
@@ -28,6 +42,24 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <div class="count mb-2">
+        {{ pagination.getTotalItemCount }} Article(s) trouvé(s) !
+    </div>
+    
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    <form method="GET">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" 
+                placeholder="Rechercher par nom..." aria-label="Rechercher par nom..." 
+                name="search_name" id="search_name" value="{{ searchName }}">
+
+            <button class="btn btn-outline-secondary" type="button" id="button-addon1"><i class="bi bi-search"></i></button>
+        </div>
+    </form>
 
     <h2>Liste des posts :</h2>
     <table class="table">
