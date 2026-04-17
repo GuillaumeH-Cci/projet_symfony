@@ -86,11 +86,69 @@ final class GameController extends AbstractController
     }
 
     #[Route('/games/edit/{id}', name: 'app_game_edit')]
-    public function editGame(Article $article, Request $request, EntityManagerInterface $entity)
+    public function editGame(Article $article, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $updateForm = $this->createForm(ArticleType::class, $article);
+        $updateForm->handleRequest($request);
+
+        if ($updateForm->isSubmitted() && $updateForm->isValid()) {
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Jeu modifié avec succès.');
+            return $this->redirectToRoute('app_games');
+        }
+
         return $this->render('game/edit.html.twig', [
             'article' => $article,
+            'articleForm' => $updateForm->createView(),
         ]);
+    }
+
+    #[Route('/consoles/edit/{id}', name: 'app_console_edit')]
+    public function editConsole(Plateforme $platform, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $updateForm = $this->createForm(PlateformeType::class, $platform);
+        $updateForm->handleRequest($request);
+
+        if ($updateForm->isSubmitted() && $updateForm->isValid()) {
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Console modifiée avec succès.');
+            return $this->redirectToRoute('app_consoles');
+        }
+
+        return $this->render('platform/edit.html.twig', [
+            'platform' => $platform,
+            'consoleForm' => $updateForm->createView(),
+        ]);
+    }
+
+    #[Route('/games/delete/{id}', name: 'app_game_delete')]
+    public function deleteGame(Article $article, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $entityManager->remove($article);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Jeu supprimé avec succès.');
+        return $this->redirectToRoute('app_games');
+    }
+
+    #[Route('/consoles/delete/{id}', name: 'app_console_delete')]
+    public function deleteConsole(Plateforme $platform, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $entityManager->remove($platform);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Console supprimée avec succès.');
+        return $this->redirectToRoute('app_consoles');
     }
 
     #[Route('/games/{id}', name: 'app_game_show')]
