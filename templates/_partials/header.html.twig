@@ -22,7 +22,7 @@
                                 {% if app.user.userProfilImage %}
                                     <img src="{{ asset(app.user.userProfilImage) }}" alt="Photo de profil" class="img-fluid rounded-circle border bg-light" style="max-width: 30px;">
                                 {% else %}
-                                    <img src="{{ asset('images/user_default.png') }}" alt="Avatar par défaut" class="img-fluid rounded-circle border bg-light" style="max-width: 30px;">
+                                    <img src="{{ asset('profile-pics/user-default.png') }}" alt="Avatar par défaut" class="img-fluid rounded-circle border bg-light" style="max-width: 30px;">
                                 {% endif %}
                             </a>
                         </li>
@@ -37,6 +37,13 @@
                             <a href="{{ path('app_login') }}" class="nav-link">Se connecter</a>
                         </li>
                     {% endif %}
+
+                    {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
+                        <li class="nav-item">
+                            <a href="{{ path('app_admin') }}" class="nav-link text-danger">Admin</a>
+                        </li>
+                    {% endif %}
+                    
                 </ul>
             </div>
             <div class="nav-dot"></div>
