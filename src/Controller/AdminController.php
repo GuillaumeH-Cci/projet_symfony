@@ -10,35 +10,36 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[IsGranted('ROLE_ADMIN')]
 final class AdminController extends AbstractController
 {
-    #[Route('/admin', name: 'app_admin')]
-    public function index(
-    UserRepository $userRepo, 
-    ArticleRepository $articleRepo, 
-    PaginatorInterface $paginator, 
-    Request $request 
-    ): Response {
     
-    $searchName = $request->query->get('search_name', '');
+    #[Route('/admin', name: 'app_admin')]
+    public function index(UserRepository $userRepo, ArticleRepository $articleRepo, PaginatorInterface $paginator, Request $request) : Response 
+    {    
+        if (!$this->isGranted('ROLE_ADMIN')) {
+        $this->addFlash('error', 'Accès réservé aux administrateurs.');
+        return $this->redirect('app_home');
+    }
+        $searchName = $request->query->get('search_name', '');
 
-    $users = $paginator->paginate(
-        $userRepo->findAll(), 
-        $request->query->getInt('pageUsers', 1),
-        5
-    );
+        $users = $paginator->paginate(
+            $userRepo->findAll(), 
+            $request->query->getInt('pageUsers', 1),
+            5
+        );
 
-    $articles = $paginator->paginate(
-        $articleRepo->findAll(),
-        $request->query->getInt('pageArticles', 1),
-        5
-    );
+        $articles = $paginator->paginate(
+            $articleRepo->findAll(),
+            $request->query->getInt('pageArticles', 1),
+            5
+        );
 
-    // 4. ENVOI À LA VUE
-    return $this->render('admin/index.html.twig', [
-        'users' => $users,
-        'articles' => $articles,
-        'searchName' => $searchName, 
-    ]);
-}   
+        
+        return $this->render('admin/index.html.twig', [
+            'users' => $users,
+            'articles' => $articles,
+            'searchName' => $searchName, 
+        ]);
+    }   
 }
