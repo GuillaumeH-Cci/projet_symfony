@@ -51,8 +51,20 @@
                                                 <img src="{{ asset('uploads/profile-pics/' ~ article.usr.userProfilImage) }}" alt="Avatar de {{ article.usr.username }}" class="rounded-circle me-2" width="30" height="30">
                                                 {% endif %}
                                                 {{ article.usr.username }}
-                                            </a>   
+                                            </a>
                                         </p>
+                                            {% if article.usr == app.user %}
+                                            <div class="mt-2">
+                                                <a href="{{ path('app_game_edit', {'id': article.id}) }}" class="btn btn-outline-primary btn-sm ms-2">Modifier</a>
+                                            </div>
+                                            {% endif %}
+
+                                            {% if article.usr == app.user or is_granted('ROLE_ADMIN') %}
+                                            <div class="mt-2">
+                                                <a href="{{ path('app_game_delete', {'id': article.id}) }}" class="btn btn-outline-primary btn-sm ms-2">Supprimer</a>
+                                            </div>
+                                            {% endif %}
+                                        
                                     </div>
                                 </div>
                             </div>
