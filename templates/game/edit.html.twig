@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un jeu{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-10 col-lg-8">
+            <h1 class="mb-4">Modifier un jeu</h1>
+
+            {{ form_start(articleForm, {'attr': {'class': 'needs-validation'}}) }}
+                <div class="mb-3">
+                    {{ form_row(articleForm.article_name) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(articleForm.article_desc) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(articleForm.article_thumbnail) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(articleForm.article_nbr_player) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(articleForm.cat) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(articleForm.plat) }}
+                </div>
+                {{ form_widget(articleForm.submit) }}
+            {{ form_end(articleForm) }}
+        </div>
+    </div>
+{% endblock %}

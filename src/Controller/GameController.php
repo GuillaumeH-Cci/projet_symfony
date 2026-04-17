@@ -85,6 +85,14 @@ final class GameController extends AbstractController
         ]);
     }
 
+    #[Route('/games/edit/{id}', name: 'app_game_edit')]
+    public function editGame(Article $article, Request $request, EntityManagerInterface $entity)
+    {
+        return $this->render('game/edit.html.twig', [
+            'article' => $article,
+        ]);
+    }
+
     #[Route('/games/{id}', name: 'app_game_show')]
     public function showGameArticle(Article $article): Response
     {   
