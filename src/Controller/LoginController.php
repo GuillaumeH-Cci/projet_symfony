@@ -14,14 +14,14 @@ final class LoginController extends AbstractController
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
     $form = $this->createForm(LoginFormType::class, [
-        'email' => $authenticationUtils->getEmail(), 
+        '_username' => $authenticationUtils->getLastUsername(), 
     ]);
 
     $error = $authenticationUtils->getLastAuthenticationError();
-    $email = $authenticationUtils->getEmail();
+    $lastUsername = $authenticationUtils->getLastUsername();
 
     return $this->render('login/index.html.twig', [
-        'email' => $email,
+        'last_username' => $lastUsername,
         'error' => $error,
         'loginForm' => $form->createView(), 
     ]);
