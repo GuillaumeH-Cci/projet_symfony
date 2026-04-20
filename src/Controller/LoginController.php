@@ -13,17 +13,22 @@ final class LoginController extends AbstractController
     #[Route('/login', name: 'app_login')]
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
-    $form = $this->createForm(LoginFormType::class, [
-        '_username' => $authenticationUtils->getLastUsername(), 
-    ]);
+        
+    // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
 
-    $error = $authenticationUtils->getLastAuthenticationError();
-    $lastUsername = $authenticationUtils->getLastUsername();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
 
-    return $this->render('login/index.html.twig', [
-        'last_username' => $lastUsername,
-        'error' => $error,
-        'loginForm' => $form->createView(), 
-    ]);
-}
+        return $this->render('auth/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+        ]);
+    }
+
+    #[Route(path: '/logout', name: 'app_logout')]
+    public function logout(): void
+    {
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
 }
