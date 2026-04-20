@@ -17,17 +17,17 @@ final class LoginController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
 
         // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+        $email = $authenticationUtils->getEmail();
 
         $form = $this->createForm(LoginFormType::class, [
-        '_username' => $authenticationUtils->getLastUsername(), 
+        '_username' => $authenticationUtils->getEmail(), 
         ]);
 
         $error = $authenticationUtils->getLastAuthenticationError();
-        $lastUsername = $authenticationUtils->getLastUsername();
+        $email = $authenticationUtils->getEmail();
 
         return $this->render('login/index.html.twig', [
-            'last_username' => $lastUsername,
+            'email' => $email,
             'error' => $error,
             'loginForm' => $form->createView(), 
         ]);
