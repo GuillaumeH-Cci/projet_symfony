@@ -227,4 +227,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function eraseCredentials(): void
+    {
+        // Si tu stockes un mot de passe temporaire en clair, efface-le ici
+        // $this->plainPassword = null;
+    }
+
+    public function __unserialize(array $data): void
+    {
+        foreach ($data as $key => $value) {
+            // On remet le password hashé tel quel depuis la session
+            $this->{$key} = $value;
+        }
+    }
 }
