@@ -25,5 +25,5 @@ final class LoginController extends AbstractController
         'error' => $error,
         'loginForm' => $form->createView(), 
     ]);
-}
+    }
 }
