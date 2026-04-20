@@ -22,14 +22,12 @@ final class RegistrationController extends AbstractController
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-
-        // 1. Vérifier si l'email existe déjà (Bonne pratique)
         $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
         if ($existingUser) {
             $this->addFlash('danger', 'Veuillez choisir une autre adresse email.');
-            // On ne fait rien d'autre, le code descendra naturellement vers le render final
+            
         } else {
-            // 2. CORRECTION ICI : Récupérer le mot de passe dans le champ 'first'
+            
             $plainPassword = $form->get('plainPassword')->get('first')->getData();
             
             $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));

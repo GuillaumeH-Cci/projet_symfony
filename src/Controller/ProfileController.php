@@ -61,7 +61,6 @@ final class ProfileController extends AbstractController
                 // Dans le cas où le mot de passe est renseigné
                 if($plainPassword) {
 
-                // encode the plain password
                 $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
                 }   
 
