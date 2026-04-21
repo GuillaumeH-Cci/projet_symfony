@@ -20,4 +20,12 @@ final class LoginController extends AbstractController
             'error' => $error,
         ]);
     }
+
+    #[Route('/logout', name: 'app_logout')]
+    public function logout(): never
+    {
+        // Le firewall Symfony intercepte cette route automatiquement.
+        // Cette méthode ne sera jamais exécutée.
+        throw new \LogicException('This method should never be reached.');
+    }
 }
