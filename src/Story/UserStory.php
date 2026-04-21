@@ -12,15 +12,40 @@ final class UserStory extends Story
 {
     public function build(): void
     {
-        // Create 5 regular users
-        $users = UserFactory::createMany(5);
-        $this->addState('users', $users, 'users');
-
-        // Create 1 admin user
-        $admin = UserFactory::createOne([
+        UserFactory::createOne([
             'email' => 'guillaumehess411@gmail.com',
+            'user_username' => 'Guillaume',
             'roles' => ['ROLE_ADMIN', 'ROLE_USER'],
         ]);
-        $this->addState('admin', $admin);
+
+        UserFactory::createOne([
+            'email' => 'alice@example.com',
+            'user_username' => 'Alice',
+            'user_name' => 'Alice',
+            'user_lastname' => 'Dupont',
+        ]);
+
+        UserFactory::createOne([
+            'email' => 'bob@example.com',
+            'user_username' => 'Bob',
+            'user_name' => 'Bob',
+            'user_lastname' => 'Martin',
+        ]);
+
+        UserFactory::createOne([
+            'email' => 'fanta@example.com',
+            'user_username' => 'Fanta',
+            'user_name' => 'Fanta',
+            'user_lastname' => 'Martin',
+        ]);
+
+        UserFactory::createOne([
+            'email' => 'Jean@example.com',
+            'user_username' => 'Jean',
+            'user_name' => 'Jean',
+            'user_lastname' => 'Peuplu',
+        ]);
+
+        UserFactory::createMany(2);
     }
 }
