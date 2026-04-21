@@ -45,7 +45,5 @@ final class UserStory extends Story
             'user_name' => 'Jean',
             'user_lastname' => 'Peuplu',
         ]);
-
-        UserFactory::createMany(2);
     }
 }
