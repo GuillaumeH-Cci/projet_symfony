@@ -12,10 +12,6 @@ final class UserStory extends Story
 {
     public function build(): void
     {
-        $users = UserFactory::createMany(5);
-        $this->addToPool('users', $users); 
-
-
         UserFactory::createOne([
             'email' => 'guillaumehess411@gmail.com',
             'user_username' => 'Guillaume',
@@ -49,5 +45,8 @@ final class UserStory extends Story
             'user_name' => 'Jean',
             'user_lastname' => 'Peuplu',
         ]);
+
+        $users = UserFactory::createMany(5);
+        $this->addToPool('users', $users); 
     }
 }
