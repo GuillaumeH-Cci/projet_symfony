@@ -13,11 +13,6 @@ final class GameStory extends Story
 {
     public function build(): void
     {
-        // Load dependencies
-        UserStory::load();
-        CatStory::load();
-        PlatStory::load();
-
         // Créer 10 articles avec des utilisateurs, catégories et plateformes aléatoires
         $games = ArticleFactory::createMany(10, function () {
             return [
