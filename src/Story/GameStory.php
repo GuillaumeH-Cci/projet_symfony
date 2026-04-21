@@ -3,6 +3,7 @@
 namespace App\Story;
 
 use App\Factory\ArticleFactory;
+use App\Factory\UserFactory;
 use Zenstruck\Foundry\Story;
 
 
@@ -19,7 +20,7 @@ final class GameStory extends Story
         'article_desc' => 'Un jeu d\'aventure emblématique sur Nintendo 64.',
         'article_nbr_player' => 1,
         'article_creation_date' => new \DateTimeImmutable('1998-11-21'),
-        'usr' => UserStory::get('users'),
+        'usr' => UserFactory::repository()->findOneBy(['email' => 'guillaumehess411@gmail.com']),
         'cat' => CatStory::getRandom('categories'),
         'plat' => PlatStory::getRandomRange('plateformes', 1, 2),
     ]);
@@ -29,7 +30,7 @@ final class GameStory extends Story
         'article_desc' => 'Le premier Mario en 3D, révolutionnaire.',
         'article_nbr_player' => 1,
         'article_creation_date' => new \DateTimeImmutable('1996-06-23'),
-        'usr' => UserStory::get('users'),
+        'usr' => UserFactory::repository()->findOneBy(['email' => 'guillaumehess411@gmail.com']),
         'cat' => CatStory::getRandom('categories'),
         'plat' => PlatStory::getRandomRange('plateformes', 1, 1),
     ]);
