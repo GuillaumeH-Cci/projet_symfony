@@ -13,15 +13,36 @@ final class GameStory extends Story
 {
     public function build(): void
     {
-        // Créer 10 articles avec des utilisateurs, catégories et plateformes aléatoires
-        $games = ArticleFactory::createMany(10, function () {
-            return [
-                'usr' => UserStory::getRandom('users'),
-                'cat' => CatStory::getRandom('categories'),
-                'plat' => PlatStory::getRandomRange('plateformes', 1, 3),
-            ];
-        });
+    // Articles spécifiques
+    ArticleFactory::createOne([
+        'article_name' => 'The Legend of Zelda: Ocarina of Time',
+        'article_desc' => 'Un jeu d\'aventure emblématique sur Nintendo 64.',
+        'article_nbr_player' => 1,
+        'article_creation_date' => new \DateTimeImmutable('1998-11-21'),
+        'usr' => UserStory::get('admin'),
+        'cat' => CatStory::getRandom('categories'),
+        'plat' => PlatStory::getRandomRange('plateformes', 1, 2),
+    ]);
 
-        $this->addState('games', $games, 'games');
+    ArticleFactory::createOne([
+        'article_name' => 'Super Mario 64',
+        'article_desc' => 'Le premier Mario en 3D, révolutionnaire.',
+        'article_nbr_player' => 1,
+        'article_creation_date' => new \DateTimeImmutable('1996-06-23'),
+        'usr' => UserStory::get('admin'),
+        'cat' => CatStory::getRandom('categories'),
+        'plat' => PlatStory::getRandomRange('plateformes', 1, 1),
+    ]);
+
+    // Articles aléatoires pour remplir
+    $games = ArticleFactory::createMany(10, function () {
+        return [
+            'usr' => UserStory::getRandom('users'),
+            'cat' => CatStory::getRandom('categories'),
+            'plat' => PlatStory::getRandomRange('plateformes', 1, 3),
+        ];
+    });
+
+    $this->addToPool('games', $games);
     }
 }
